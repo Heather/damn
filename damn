@@ -1,8 +1,11 @@
 #!/bin/bash
 
-cp "/usr/portage/${1}-9999.ebuild" "/usr/portage/${1}-9999.ebuild.damn"
+for file in "./damnation/${1}/*"
+do
+    cp "/usr/portage/${1}/${file}" "/usr/portage/${1}/${file}.damn"
 
-"./damnation/${1}-9999.ebuild.patcher"
-emerge -av ${1}
+	"./damnation/${1}/${file}"
+	emerge -av ${1}
 
-cp "/usr/portage/${1}-9999.ebuild.damn" "/usr/portage/${1}-9999.ebuild"
+	cp "/usr/portage/${1}/${file}.damn" "/usr/portage/${1}/${file}"
+done
