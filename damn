@@ -3,13 +3,16 @@
 for file in "damnation/${1}/"*
 do
 	f=$(basename $file)
-    cp "/usr/portage/${1}/${f}" "/usr/portage/${1}/${f}.damn"
+	if [ -f "/usr/portage/${1}/${f}" ]
+	then
+		cp "/usr/portage/${1}/${f}" "/usr/portage/${1}/${f}.damn"
 
-	"./damnation/${1}/${f}"
-	ebuild "/usr/portage/${1}/${f}" digest
+		"./damnation/${1}/${f}"
+		ebuild "/usr/portage/${1}/${f}" digest
 
-	emerge -av ${1}
+		emerge -av ${1}
 
-	cp "/usr/portage/${1}/${f}.damn" "/usr/portage/${1}/${f}"
-	ebuild "/usr/portage/${1}/${f}" digest
+		cp "/usr/portage/${1}/${f}.damn" "/usr/portage/${1}/${f}"
+		ebuild "/usr/portage/${1}/${f}" digest
+	fi
 done
