@@ -1,0 +1,3 @@
+[submodule "damnation"]
+	path = damnation
+	url = git@github.com:Cynede/damnation.git
