@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cp "/usr/portage/${1}" "/usr/portage/${1}.damn"
+
+"./damnation/${1}.patcher"
+emerge -av ${1}
+
+cp "/usr/portage/${1}.damn" "/usr/portage/${1}"
