@@ -2,7 +2,7 @@
 
 for file in "damnation/${1}/"*
 do
-	f = $(basename $file)
+	f=$(basename $file)
     cp "/usr/portage/${1}/${f}" "/usr/portage/${1}/${f}.damn"
 
 	"./damnation/${1}/${f}"
