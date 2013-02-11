@@ -6,7 +6,10 @@ do
     cp "/usr/portage/${1}/${f}" "/usr/portage/${1}/${f}.damn"
 
 	"./damnation/${1}/${f}"
+	ebuild "/usr/portage/${1}/${f}" digest
+
 	emerge -av ${1}
 
 	cp "/usr/portage/${1}/${f}.damn" "/usr/portage/${1}/${f}"
+	ebuild "/usr/portage/${1}/${f}" digest
 done
