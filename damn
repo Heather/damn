@@ -1,8 +1,8 @@
 #!/bin/bash
 
-cp "/usr/portage/${1}.ebuild" "/usr/portage/${1}.ebuild.damn"
+cp "/usr/portage/${1}-9999.ebuild" "/usr/portage/${1}-9999.ebuild.damn"
 
-"./damnation/${1}.patcher"
+"./damnation/${1}-9999.ebuild.patcher"
 emerge -av ${1}
 
-cp "/usr/portage/${1}.ebuild.damn" "/usr/portage/${1}.ebuild"
+cp "/usr/portage/${1}-9999.ebuild.damn" "/usr/portage/${1}-9999.ebuild"
