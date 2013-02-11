@@ -10,9 +10,11 @@ do
 		"./damnation/${1}/${f}"
 		ebuild "/usr/portage/${1}/${f}" digest
 
-		emerge -av ${1}
+		emerge ${1}
 
 		cp "/usr/portage/${1}/${f}.damn" "/usr/portage/${1}/${f}"
 		ebuild "/usr/portage/${1}/${f}" digest
+
+		rm -rf "/usr/portage/${1}/${f}.damn"
 	fi
 done
