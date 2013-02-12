@@ -1,20 +1,44 @@
 #!/bin/bash
 
-for file in "damnation/${1}/"*
-do
-	f=$(basename $file)
-	if [ -f "/usr/portage/${1}/${f}" ]
-	then
-		cp "/usr/portage/${1}/${f}" "/usr/portage/${1}/${f}.damn"
+function damn() {
+	for file in "damnation/${1}/"*
+	do
+		f=$(basename $file)
+		if [ -f "/usr/portage/${1}/${f}" ]
+		then
+			cp "/usr/portage/${1}/${f}" "/usr/portage/${1}/${f}.damn"
 
-		"./damnation/${1}/${f}"
-		ebuild "/usr/portage/${1}/${f}" digest
+			"./damnation/${1}/${f}"
+			ebuild "/usr/portage/${1}/${f}" digest
 
-		emerge ${1}
+			emerge ${1}
 
-		cp "/usr/portage/${1}/${f}.damn" "/usr/portage/${1}/${f}"
-		ebuild "/usr/portage/${1}/${f}" digest
+			cp "/usr/portage/${1}/${f}.damn" "/usr/portage/${1}/${f}"
+			ebuild "/usr/portage/${1}/${f}" digest
 
-		rm -rf "/usr/portage/${1}/${f}.damn"
-	fi
-done
+			rm -rf "/usr/portage/${1}/${f}.damn"
+		fi
+	done
+}
+
+function version() {
+	echo "damn 0.0.1"
+}
+
+if [ $1 = "all" ]
+then
+	for dir in in "damnation/"*
+	do
+		d=$(basename $dir)
+		for package in in "damnation/${d}/"*
+		do
+			p=$(basename $package)
+			damn "${d}/${p}"
+		done
+	done
+elif [ $1 = "-v" ] || [ $1 = "--version" ]
+then
+	version
+else
+	damn $1
+fi
