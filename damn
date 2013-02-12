@@ -25,7 +25,10 @@ function version() {
 	echo "damn 0.0.1"
 }
 
-if [ $1 = "all" ]
+if [ $# -eq 0 ]
+then
+	echo "Usage: damn <package> (examples: [damn sys-apps/portage; damn all])"
+elif [ $1 = "all" ]
 then
 	for dir in in "damnation/"*
 	do
