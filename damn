@@ -4,19 +4,25 @@ function damn() {
 	for file in "damnation/${1}/"*
 	do
 		f=$(basename $file)
-		if [ -f "/usr/portage/${1}/${f}" ]
+		if [ -f "damnation/${1}/overlay" ]
 		then
-			cp "/usr/portage/${1}/${f}" "/usr/portage/${1}/${f}.damn"
+                                             overlay=$(<"damnation/${1}/overlay")
+                              else
+                                             overlay="/usr/portage"
+		fi
+		if [ -f "${overlay}/${1}/${f}" ]
+		then
+			cp "${overlay}/${1}/${f}" "${overlay}/${1}/${f}.damn"
 
 			"./damnation/${1}/${f}"
-			ebuild "/usr/portage/${1}/${f}" digest
+			ebuild "${overlay}/${1}/${f}" digest
 
 			emerge ${1}
 
-			cp "/usr/portage/${1}/${f}.damn" "/usr/portage/${1}/${f}"
-			ebuild "/usr/portage/${1}/${f}" digest
+			cp "${overlay}/${1}/${f}.damn" "${overlay}/${1}/${f}"
+			ebuild "${overlay}/${1}/${f}" digest
 
-			rm -rf "/usr/portage/${1}/${f}.damn"
+			rm -rf "${overlay}/${1}/${f}.damn"
 		fi
 	done
 }
