@@ -22,7 +22,15 @@ function damn() {
 }
 
 function version() {
-	echo "damn 0.0.1"
+	echo "damn 0.0.2"
+}
+
+function help() {
+               echo "damn ..."
+               echo "    <category>/<package> to emerge package from damnation"
+               echo "    all to rebuild all"
+               echo "    -v or --version to check version"
+               echo "    --help to see this message"
 }
 
 if [ $# -eq 0 ]
@@ -42,6 +50,9 @@ then
 elif [ $1 = "-v" ] || [ $1 = "--version" ]
 then
 	version
+elif [ $1 = "--help" ]
+then
+               help
 else
 	damn $1
 fi
